@@ -21,6 +21,7 @@ Analytical
 
 
 k_1 = alpha_1 beta A k0^alpha / (1+alpha_1*beta) 
+<<<<<<< HEAD
 [num_val100 k_val_100]= iter_val(grid100);
 
 or 
@@ -28,4 +29,9 @@ or
 
 k0 = grid100;
 k1 = k_val_100;
+=======
+
+
+or 
+>>>>>>> 06be91d1e5e86ddda50cb24b196c8665d2ddc573
 
