@@ -1,0 +1,27 @@
+
+12
+grid100 = linspace(2,10,100);
+grid1000 = linspace(2,10,1000);
+
+% Analytical solutions
+an_val100 = iter_val_an(grid100);
+an_val1000 = iter_val_an(grid1000);
+
+% Numerical solutions
+num_val100 = iter_val(grid100);
+num_val1000 = iter_val(grid1000);
+
+% Gap
+diff100 = max(abs(num_val100 - an_val100));
+diff1000 = max(abs(num_val1000 - an_val1000));
+
+
+13
+Analytical 
+
+
+k_1 = alpha_1 beta A k0^alpha / (1+alpha_1*beta) 
+
+
+or 
+

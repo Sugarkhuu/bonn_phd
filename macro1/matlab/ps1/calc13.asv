@@ -1,0 +1,31 @@
+% Analytical 
+
+A     = 20;
+alpha = 0.3;
+beta  = 0.6; 
+alpha_1 = alpha/(1-alpha*beta);
+
+k0   = 2;
+k_an = k0;
+
+for i=1:19
+    k1 = alpha_1*beta*A*(k0^alpha)/(1+alpha_1*beta);
+    k_an(end+1) = k1;
+    k0 = k1;
+end
+
+grid100 = linspace(2,10,100);
+[num_val100 k_val_100]= iter_val(grid100);
+
+
+k0_grid = grid100;
+k_n = [];
+
+idx = 1; % value of k0
+i = 1
+while i <= 20
+    k1 = k_val_100(idx);
+    k1_grid(end+1) = k1;
+    idx = find(k1 == k0);
+    i = i+1;
+end
