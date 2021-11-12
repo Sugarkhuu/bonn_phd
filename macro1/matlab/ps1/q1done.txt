@@ -1,0 +1,345 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}  % equation*
+\usepackage{indentfirst}
+\usepackage{ mathrsfs }
+
+% for matlab
+\usepackage{listings}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+% section equation numbering
+\usepackage{chngcntr}
+\counterwithin*{equation}{section}
+\counterwithin*{equation}{subsection}
+
+
+\title{Answers to the Problem Set 1 \\
+\small{Macroeconomis (Ph.D.)}}
+\author{Sugarkhuu Radnaa}
+\date{25 October, 2021}
+
+\begin{document}
+
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+\maketitle
+
+\section*{Question 1: Neoclassical growth model and dynamic programming}
+
+\begin{enumerate}
+    
+    \item 
+    It is given that $\lambda F(k,n) = F(\lambda k, \lambda n)$. Taking the total derivative with respect to $\lambda$ from the two sides of the equation will yield the following:
+    \begin{equation} \label{eq:main}
+        F(k,n) = F_{1}(\lambda k, \lambda n)k +  F_{2}(\lambda k, \lambda n)n
+    \end{equation}
+        
+    Now take the derivative with respect to the argument i = k,n. This yields:
+    
+    \begin{equation}
+        \lambda F_{i}(k,n) = F_{i}(\lambda k, \lambda n)\lambda
+    \end{equation}
+
+Cancelling $\lambda$ from both sides, I get   
+    
+    \begin{equation} \label{eq:sub}
+        F_{i}(k,n) = F_{i}(\lambda k, \lambda n)
+    \end{equation}
+    
+Thus, substituting the Equation \ref{eq:sub} into the Equation \ref{eq:main}, I arrive at the desired result: 
+
+    \begin{equation} 
+        F(k,n) = F_{1}(k,n)k +  F_{2}(k,n)n
+    \end{equation}
+    
+   \item Equation \ref{eq:sub} in the previous section contains the result.
+   
+   \item The objective of the representative household in the competitive market is to maximize its lifetime utility. It earns income in each period as the wage for supplying its labor to firms, the rent from renting its capital to firms and the profit of the firms which are owned by the households by design. \\
+   The household make choices over how much to consumer or invest out of its income, and to work or enjoy the leisure time. In mathematical terms, 
+   
+   \begin{equation*}
+       \max_{\{c_{t},i_{t},n_{t} \}^{\infty}_{t=0}} \sum^{\infty}_{t=0} \beta^{t}U(c_{t})
+   \end{equation*}
+   
+   \begin{align*}
+       s.t. \sum^{\infty}_{t=0}p_{t}(c_{t}+i_{t}) \leq \sum^{\infty}_{t=0} p_{t}(r_{t}k_{t}+w_{t}n_{t})+\pi \\
+       k_{t+1}=(1-\delta)k_{t}+i_{t} \\
+       c_{t},k_{t+1} \geq 0,  \forall t \\
+       0 \leq n_{t} \leq 1,  \forall t \\
+       k_{0} \text{ is given}
+   \end{align*}
+where $c_{t}$ - consumption, $i_{t}$ - investment, $k_{t}$ - capital, $n_{t}$ - labor, $r_{t}$ - rent, $w_{t}$ - wage, $p_{t}$ - price of the output, $\beta$ - time discount factor, $u$ - period utility of the household, $\pi$ - profit of the representative firm. 
+
+    \item Due to the Inada conditions on the utility and the production functions, I may assume that the nonnegativity conditions on consumption and capital are satisfied. Furthermore, given the positive marginal product of labor at all levels, I assume that $n=1$ or the labor is supplied fully. As the firms are price takers, its profit will be zero as the factor prices will equal the marginal products. As the utility is strictly increasing in consumption, the budget constraint will hold in equilibrium. 
+    
+    Now, in short, the household problem in sequential form looks:
+
+   \begin{equation*}
+       \max_{\{c_{t},i_{t},n_{t} \}^{\infty}_{t=0}} \sum^{\infty}_{t=0} \beta^{t}U(c_{t})
+   \end{equation*}   
+   
+   \begin{center}
+           \text{s.t.}       
+   \end{center}
+    \begin{align*}
+       \sum^{\infty}_{t=0}p_{t}(c_{t}+k_{t+1}-(1-\delta)k_{t}) = \sum^{\infty}_{t=0} p_{t}(r_{t}k_{t}+w_{t}n_{t}) \\
+   \end{align*} 
+    The Lagrangian now looks: 
+    \begin{equation*}
+    \mathscr{L}(c_{t},c_{t+1},k_{t+1}) = \sum^{\infty}_{t=0} \beta^{t}U(c_{t}) + \mu (\sum^{\infty}_{t=0} p_{t}(r_{t}k_{t}+w_{t}n_{t}) - (\sum^{\infty}_{t=0}p_{t}(c_{t}+k_{t+1}-(1-\delta)k_{t})))
+    \end{equation*}   
+    
+    The F.O.Cs with respect to $c_{t},c_{t+1},k_{t+1}$ are:
+    
+    
+    \begin{align*}
+        \beta^{t}U(c_{t}) & = \mu p_{t} \\
+        \beta^{t+1}U(c_{t+1}) & = \mu p_{t+1} \\
+        \mu p_{t} & = (r_{t+1}+1-\delta)p_{t+1}
+    \end{align*}
+    Thus, the Euler equation results from the combination: 
+    
+    \begin{equation*}
+        \frac{\beta U^{'}(c_{t+1})}{U^{'}(c_{t})} = \frac{p_{t+1}}{p_{t}} = \frac{1}{1+r_{t+1}-\delta}
+    \end{equation*}
+  
+ 
+  
+    \item Normalizing $n=1$, the production function becomes $F(k) = Ak^{\alpha}$. Since there is no market, there is no rent and wage. The social planner will conduct production and allocate it to consumption and investment. The social planner will solve the following problem:
+    
+    \begin{equation*}
+       \max_{\{c_{t},k_{t+1}\}^{\infty}_{t=0}} \sum^{\infty}_{t=0} \beta^{t}U(c_{t})
+    \end{equation*}
+
+   \begin{center}
+           \text{s.t.}       
+   \end{center}    
+   
+    \begin{align*}
+        y_{t} & = c_{t} + i_{t} \\
+        k_{t+1} & = (1-\delta)k_{t} + i_{t} \\
+        y_{t} & = Ak^{\alpha}_{t}
+    \end{align*}
+    
+    or just (constraints)
+    \begin{equation*}
+        Ak^{\alpha}_{t} = c_{t} + k_{t+1}+(1-\delta)k_{t}
+    \end{equation*}
+    
+    \item     
+    
+    Since  $Ak^{\alpha}_{t} = c_{t} + k_{t+1}+(1-\delta)k_{t}$, 
+    \begin{align*}
+       v_{k_{0}} & = \max_{\{c_{t},k_{t+1}\}^{\infty}_{t=0}} \sum^{\infty}_{t=0} \beta^{t}U(c_{t}) \\
+       & = \max_{\{k_{t+1}\}^{\infty}_{t=0}} \sum^{\infty}_{t=0} \beta^{t}U(Ak^{\alpha}_{t} - k_{t+1}+(1-\delta)k_{t}) \\
+       & = \max_{\{k_{t+1}\}^{\infty}_{t=0}} (U(Ak^{\alpha}_{0} - k_{1}+(1-\delta)k_{0}) + \sum^{\infty}_{t=1} \beta^{t}U(Ak^{\alpha}_{t} - k_{t+1} +(1-\delta)k_{t})) \\
+              & = \max_{\{k_{1}\}} (U(Ak^{\alpha}_{0} - k_{1}+(1-\delta)k_{0}) + \beta \bigg[ \max_{\{k_{t+2}\}^{\infty}_{t=1}}\sum^{\infty}_{t=0} \beta^{t}U(Ak^{\alpha}_{t+1} - k_{t+2} \\ 
+              & +(1-\delta)k_{t+1})) \bigg]) \\
+              & = \max_{\{k_{1}\}} (U(Ak^{\alpha}_{0} - k_{1}+(1-\delta)k_{0}) + \beta v_{k_{1}}) \\
+              \text{and } k_{0} \text{ is given.}
+    \end{align*}
+    
+    Because $k_{t}$ is given as of the current date and it characterizes the history up until now, it is the state variable. While, $k_{t+1}$ is under the discretion of the social planner and, thus, the control variable of the dynamic system. 
+    
+    \item \textbf{Blackwell}
+
+    \item Assuming $\delta = 1$, $u(c,n)=log(c)$ and $f(k,n) = Ak^{\alpha}$, and guessing $v(k) = \alpha_{0}+
+    \alpha_{1}log(k)$, I will have
+    
+    \begin{align}
+        & v(k_{t}) = u_{t} + \beta v(k_{t+1}) \\
+        \label{eq:val}
+        & \alpha_{0}+\alpha_{1}log(k_{t}) = log(Ak_{t}^{\alpha}-k_{t+1}) + \beta (\alpha_{0}+\alpha_{1}log(k_{t+1})))
+    \end{align}
+    
+    The F.O.C with respect $k_{t+1}$ will yield
+    
+    \begin{align*}
+        \frac{1}{Ak_{t}^{\alpha}-k_{t+1}} &= \frac{\alpha_{1}\beta}{k_{t+1}} \\
+         k_{t+1} &= \frac{\alpha_{1}\beta A k_{t}^{\alpha}}{1+\alpha_{1}\beta}
+    \end{align*}
+
+which is the policy function for k. Now evaluating the value function (equation \ref{eq:val}) at this optimal solution, I get
+
+    \begin{align*}
+        \alpha_{0}+\alpha_{1}log(k_{t}) &= log(Ak_{t}^{\alpha}-\frac{\alpha_{1}\beta A k_{t}^{\alpha}}{1+\alpha_{1}\beta}) + \beta (\alpha_{0}+\alpha_{1}log(\frac{\alpha_{1}\beta A k_{t}^{\alpha}}{1+\alpha_{1}\beta}))) \\
+        &= - log(1+\alpha_{1}\beta) + log(A) + \alpha log(k_{t}) + \alpha_{0}\beta + \alpha_{1}\beta log(\frac{\alpha_{1}\beta A}{1+\alpha_{1}\beta}) + \alpha \alpha_{1}\beta log(k_{t}) \\
+        &= - log(1+\alpha_{1}\beta) + log(A) + \alpha_{0}\beta + \alpha_{1}\beta log(\frac{\alpha_{1}\beta A}{1+\alpha_{1}\beta}) + (\alpha + \alpha \alpha_{1}\beta) log(k_{t})
+    \end{align*}
+
+Matching the matching items of the two sides of the equation will give
+
+    \begin{align*}
+        \alpha_{1} &= \alpha + \alpha \alpha_{1}\beta \\
+        \alpha_{0} &= - log(1+\alpha_{1}\beta) + log(A) + \alpha_{0}\beta + \alpha_{1}\beta log(\frac{\alpha_{1}\beta A}{1+\alpha_{1}\beta})
+    \end{align*}
+
+From the first, I get 
+
+\begin{equation*}
+    \alpha_{1} = \frac{\alpha}{1-\alpha \beta}
+\end{equation*}
+
+Substituting it to the second, I get
+
+    \begin{equation*}
+        \alpha_{0} = \frac{1}{1-\beta} \Big( \frac{\alpha \beta}{1-\alpha \beta} log(\alpha \beta) + log(1-\alpha \beta) +
+        log(A) + \frac{\alpha \beta log(A)}{1-\alpha \beta} 
+        \Big) 
+    \end{equation*}
+    
+    \item See Appendix \ref{appendix:a} for the solution code. The value function converges at the $31^{st}$ iteration to 
+    
+    \begin{equation*}
+        {7.9476, 8.2019,8.3514,8.4552,8.5359}
+    \end{equation*}
+for    
+    \begin{equation*}
+        {2,4,6,8,10}
+    \end{equation*}
+, respectively. 
+    
+    \item 
+    Analytical solution for $\alpha = 0.3, \beta = 0.6$ is 
+
+\begin{equation*}
+        {7.9497, 8.2033,8.3517,8.4569,8.5386}
+    \end{equation*}
+for    
+    \begin{equation*}
+        {2,4,6,8,10}
+    \end{equation*}
+, respectively. The maximum absolute difference is 0.027.
+
+    \item See Appendix \ref{appendix:b} for the solution code. One can input the grid for capital such as a hundred equally distanced numbers between and including 2 and 10: $linspace(2,10,100)$. 
+    
+    \item 
+    For the 100-point grid, the maximum absolute difference between the analytical and the numerical solutions was $1.135 \cdot 10^{-5} $. Similarly, the one for the 1000-point was $1.2205 \cdot 10^{-6}$. 
+    One can see that as the grid becomes more compact, the accuracy of the numerical solution increases. The above convergences happened at the $31^{st}$ iteration. \\
+    
+    See Appendix \ref{appendix:c} for the Matlab code used. 
+    
+    \item 
+    The below table shows the first 20 period optimal path of the capital calculated by analytical and numerical (with 100 grids) solutions. 
+    
+    \begin{center}
+        \begin{tabular}{c|c|c}
+            \textbf{Period} & \textbf{Analytical} & \textbf{Numerical (100)} \\
+            1 & 2.000000000000000  & 2.000000000000000 \\
+            2 & 4.432119888041697  & 4.424242424242424 \\
+            3& 5.627117070389757  & 5.636363636363637 \\
+            4& 6.044888380109351  & 6.040404040404041 \\
+            5& 6.176166374168679  & 6.202020202020202 \\
+            6& 6.216102923834804  & 6.202020202020202 \\
+            7& 6.228134169600861  & 6.202020202020202 \\
+            8& 6.231748082136402  & 6.202020202020202 \\
+            9& 6.232832664755664  & 6.202020202020202 \\
+            10& 6.233158076348608  & 6.202020202020202 \\
+            11& 6.233255703139403  & 6.202020202020202 \\
+            12& 6.233284991474812  & 6.202020202020202 \\
+            13& 6.233293778002269  & 6.202020202020202 \\
+            14& 6.233296413962922  & 6.202020202020202 \\
+            15& 6.233297204751334  & 6.202020202020202 \\
+            16& 6.233297441987878  & 6.202020202020202 \\
+            17& 6.233297513158843  & 6.202020202020202 \\
+            18& 6.233297534510132  & 6.202020202020202 \\
+            19& 6.233297540915520  & 6.202020202020202 \\
+            20 & 6.233297542837136  & 6.202020202020202 \\
+        \end{tabular} 
+    \end{center} 
+    
+    See Appendix \ref{appendix:d} the code used.
+    
+    \end{enumerate}
+
+\newpage
+\section*{Question 2: Policy function iteration}
+
+
+\begin{enumerate}
+    \item 
+    
+    The recursive problem is given as 
+    
+    \begin{equation*}
+        v(k_{t}) = \max_{k_{t+1}} log(Ak_{t}^{\alpha}-k_{t+1}) + \beta v(k_{t+1}) 
+    \end{equation*}
+    
+The first order condition with respect to $k_{t+1}$ will be 
+
+    \begin{equation}
+    \label{eq:foc}
+        \frac{1}{Ak_{t}^{\alpha}-k_{t+1}} = \beta v^{'}(k_{t+1})
+    \end{equation}
+    
+By the envelope theorem, I get 
+
+\begin{equation*}
+    v^{'}(k_{t}) = \frac{\alpha Ak_{t}^{\alpha-1}}{Ak_{t}^{\alpha}-k_{t+1}}
+\end{equation*}
+
+Substituting it into Equation \ref{eq:foc} for $k_{t+1}$, one gets Euler equation as
+
+    \begin{equation*}
+        \frac{1}{Ak_{t}^{\alpha}-k_{t+1}} = \beta \frac{\alpha Ak_{t+1}^{\alpha-1}}{Ak_{t+1}^{\alpha}-k_{t+2}}
+    \end{equation*}
+
+which is a particular example of the general Euler equation
+
+    \begin{equation*}
+        U^{'}(f(k_{t})-k_{t+1}) = \beta f(k_{t+1})U^{'}(f(k_{t+1})-k_{t+2})
+    \end{equation*}
+
+
+    \item
+    
+    
+    
+    
+    
+    
+\end{enumerate}
+
+
+
+\newpage
+\appendix
+
+\section{Matlab Code for Problem 1.9}
+\label{appendix:a}
+\lstinputlisting{valFuncIter.m}
+
+\newpage
+\section{Matlab Code for Problem 1.11}
+\label{appendix:b}
+\lstinputlisting{iter_val.m}
+
+\newpage
+\section{Matlab Code for Problem 1.12}
+\label{appendix:c}
+\lstinputlisting{compare12.m}
+
+\newpage
+\section{Matlab Code for Problem 1.13}
+\label{appendix:d}
+\lstinputlisting{calc13.m}
+
+\end{document}

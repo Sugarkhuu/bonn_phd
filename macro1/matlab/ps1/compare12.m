@@ -35,7 +35,7 @@ function an_val_arr = iter_val_an(ngrid)
     alpha_1 = alpha/(1-alpha*beta);
     
     kgrid  = ngrid';
-    an_val_arr = []
+    an_val_arr = [];
     
     for i = 1:length(kgrid)
         an_val = alpha_0+alpha_1*log(kgrid(i));

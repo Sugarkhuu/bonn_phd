@@ -1,3 +1,4 @@
+% search for all possible values in each k
 clear
 clc
 
@@ -7,11 +8,14 @@ klow = 2; % lowest grid point
 khigh = 10; % highest grid point
 kgrid = linspace(klow,khigh,N)'; % Transpose it to be a column vector
 
+
+
 % Output and undepreciated capital at each grid point ("cash at hand")
+A = 20;
 a = 0.3; % Parameter of Cobb Douglas function
-d = 0.1; % Depreciation rate
-b = 0.9; % Time discount rate
-cah = kgrid.^a + (1 - d) * kgrid;
+d = 1; % Depreciation rate
+b = 0.6; % Time discount rate
+cah = A*kgrid.^a + (1 - d) * kgrid;
 
     % Initial guess for policy function
     pol = cah * 0.5;
@@ -23,7 +27,6 @@ for s = 1:1000
     % Take second column as guess
     x = kguess(:,2);
 
-
     for t = 1:1000
         % Marginal utility today
         c = cah - x; % consumption
@@ -31,7 +34,10 @@ for s = 1:1000
 
         % Marginal utility tomorrow
         kp = interp1(kgrid,pol,x,'linear','extrap'); % k(t+2)
+
         % You fill in here ....
+        cp = A*x.^a-kp+(1-d)*x;
+
         mup = 1./cp;
         % Marginal return on capital net of depreciation next period
         r = a * x.^(a - 1) - d;
@@ -40,15 +46,21 @@ for s = 1:1000
         res = mu - b * (1 + r) .* mup;
 
         % Update the guess for x until |res| < 1e-6
-        % Not this must be the maximum over all res as res is going to be a Nx1
+        % Note this must be the maximum over all res as res is going to be a Nx1
         % vector
-        maxres = max(abs(res));
+        maxres = max(abs(res))
         if(maxres < 1.0e-6)
             break;
         end
 
         % Now update kguess and x and continue with loop
         % You fill in here ...
+        
+%         kguess = ;
+        
+        x = x+res;
+keyboard
+plot(res)
 
     end
     % Update the policy function (x is your solution to the Euler equation, i.e. optimal k(t+1) given k(t))
@@ -59,4 +71,5 @@ for s = 1:1000
     if(maxres < 1.0e-6)
         break;
     end
+    s
 end

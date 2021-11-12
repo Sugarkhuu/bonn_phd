@@ -1,5 +1,7 @@
 function an_val_arr = iter_val_an(ngrid)
 % analytical calculation of value function for ngrid - grid of capital
+% Example:
+%       value = iter_val_an(linspace(2,10,1000))
 
 alpha = 0.3;
 beta  = 0.6;
